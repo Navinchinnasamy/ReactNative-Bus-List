@@ -1,34 +1,16 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
+import { Button, View, TouchableOpacity, Image, Text } from 'react-native'
 import {createStackNavigator} from '@react-navigation/stack';
 import List from './List';
 import NorthList from './NorthList';
 import SouthList from './SouthList';
-
-class NavigationDrawerStructure extends Component {
-  //Structure for the navigatin Drawer
-  toggleDrawer = () => {
-    //Props to open/close the drawer
-    this.props.navigationProps.toggleDrawer();
-  };
-  render() {
-    return (
-      <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
-          {/*Donute Button Image */}
-          <Image
-            source={require('../assets/drawer.png')}
-            style={{ width: 25, height: 25, marginLeft: 5 }}
-          />
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
+import { useNavigation } from '@react-navigation/native';
 
 const Stack = createStackNavigator()
 
 function Home_StackNavigator() {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator>
       <Stack.Screen 
@@ -43,6 +25,17 @@ function Home_StackNavigator() {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
+		  headerLeft: () => (
+			<View style={{ flexDirection: 'row' }}>
+			  <TouchableOpacity onPress={()=>{navigation.toggleDrawer();}} >
+			    <Image
+				  source={require('../assets/drawer.png')}
+				  style={{ width: 25, height: 25, marginLeft: 5, backgroundColor: 'white', borderRadius: 5 }}
+			    />
+			  </TouchableOpacity>
+			  <Text>{JSON.stringify(navigation.toggleDrawer())}</Text>
+		    </View>
+          ),
         }}
 		/>
     </Stack.Navigator>

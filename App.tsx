@@ -14,7 +14,8 @@ const App = () => {
 		  initialRouteName="Home" 
 		  drawerContentOptions={{
 			activeTintColor: '#e91e63',
-			itemStyle: { marginVertical: 10 },
+			itemStyle: { marginVertical: 5 },
+			labelStyle: { fontWeight: 'bold', fontSize: 18 }
 		  }}
 		  >
 		  <Drawer.Screen 

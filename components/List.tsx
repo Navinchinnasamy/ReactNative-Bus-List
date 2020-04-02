@@ -15,7 +15,7 @@ class List extends Component {
     //Getting the current date-time with required formate and UTC   
 	let date = moment()
 	  .utcOffset('+05:30')
-	  .format('hh:mm a');
+	  .format('hh:mm A');
 	let t1 = date.split(' ');
 	let t2 = t1[0].split(':');
 	let hrs = parseInt(t2[0]);
@@ -42,7 +42,7 @@ class List extends Component {
 		
          <ScrollView>
 			<SafeAreaView>
-            {
+            { this.state.busList.length > 0 ? 
                 this.state.busList.map((item, index) => (
                   <TouchableOpacity
                      key = {item.id}
@@ -55,7 +55,7 @@ class List extends Component {
 					  <Text style = {styles.busTime}>{item.direction}</Text>
 					</View>
                   </TouchableOpacity>
-               ))
+               )) : <Text style={styles.noData}>There are no buses available within an hour.</Text>
             }
 			</SafeAreaView>
          </ScrollView>
@@ -88,5 +88,12 @@ const styles = StyleSheet.create ({
    },
    busInfo: {
 	   marginLeft: 15
+   },
+   noData: {
+	   color: 'rgb(252, 146, 158)',
+	   textAlign: 'center',
+	   fontWeight: 'bold',
+	   fontSize: 20,
+	   marginTop: '60%'
    }
 })
